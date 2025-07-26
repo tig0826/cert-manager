@@ -1,12 +1,11 @@
-COMPUTED VALUES:
 acmesolver:
   image:
     pullPolicy: IfNotPresent
     repository: quay.io/jetstack/cert-manager-acmesolver
 affinity: {}
 approveSignerNames:
-- issuers.cert-manager.io/*
-- clusterissuers.cert-manager.io/*
+  - issuers.cert-manager.io/*
+  - clusterissuers.cert-manager.io/*
 cainjector:
   affinity: {}
   config: {}
@@ -14,13 +13,13 @@ cainjector:
     allowPrivilegeEscalation: false
     capabilities:
       drop:
-      - ALL
+        - ALL
     readOnlyRootFilesystem: true
   enableServiceLinks: false
   enabled: true
   extraArgs: []
   extraEnv: []
-  featureGates: ""
+  featureGates: ''
   image:
     pullPolicy: IfNotPresent
     repository: quay.io/jetstack/cert-manager-cainjector
@@ -44,20 +43,20 @@ cainjector:
   topologySpreadConstraints: []
   volumeMounts: []
   volumes: []
-clusterResourceNamespace: ""
+clusterResourceNamespace: ''
 config: {}
 containerSecurityContext:
   allowPrivilegeEscalation: false
   capabilities:
     drop:
-    - ALL
+      - ALL
   readOnlyRootFilesystem: true
 crds:
   enabled: false
   keep: true
 creator: helm
 disableAutoApproval: false
-dns01RecursiveNameservers: ""
+dns01RecursiveNameservers: ''
 dns01RecursiveNameserversOnly: false
 enableCertificateOwnerRef: false
 enableServiceLinks: false
@@ -65,16 +64,8 @@ enabled: true
 extraArgs: []
 extraEnv: []
 extraObjects: []
-featureGates: ""
-fullnameOverride: cert-manager
+featureGates: ''
 global:
-  cattle:
-    clusterId: c-m-2g46tbjx
-    clusterName: k8s-home
-    rkePathPrefix: ""
-    rkeWindowsPathPrefix: ""
-    systemProjectId: p-jrfqn
-    url: https://192.168.0.100
   commonLabels: {}
   imagePullSecrets: []
   leaderElection:
@@ -83,10 +74,12 @@ global:
   podSecurityPolicy:
     enabled: false
     useAppArmor: true
-  priorityClassName: ""
+  priorityClassName: ''
   rbac:
     aggregateClusterRoles: true
     create: true
+  cattle:
+    systemProjectId: p-jrfqn
 hostAliases: []
 image:
   pullPolicy: IfNotPresent
@@ -101,7 +94,7 @@ livenessProbe:
   successThreshold: 1
   timeoutSeconds: 15
 maxConcurrentChallenges: 60
-namespace: ""
+namespace: ''
 nodeSelector:
   kubernetes.io/os: linux
 podDisruptionBudget:
@@ -146,12 +139,12 @@ startupapicheck:
     allowPrivilegeEscalation: false
     capabilities:
       drop:
-      - ALL
+        - ALL
     readOnlyRootFilesystem: true
   enableServiceLinks: false
   enabled: true
   extraArgs:
-  - -v
+    - '-v'
   extraEnv: []
   image:
     pullPolicy: IfNotPresent
@@ -159,7 +152,7 @@ startupapicheck:
   jobAnnotations:
     helm.sh/hook: post-install
     helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
-    helm.sh/hook-weight: "1"
+    helm.sh/hook-weight: '1'
   nodeSelector:
     kubernetes.io/os: linux
   podLabels: {}
@@ -167,7 +160,7 @@ startupapicheck:
     annotations:
       helm.sh/hook: post-install
       helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
-      helm.sh/hook-weight: "-5"
+      helm.sh/hook-weight: '-5'
   resources: {}
   securityContext:
     runAsNonRoot: true
@@ -177,7 +170,7 @@ startupapicheck:
     annotations:
       helm.sh/hook: post-install
       helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
-      helm.sh/hook-weight: "-5"
+      helm.sh/hook-weight: '-5'
     automountServiceAccountToken: true
     create: true
   timeout: 5m
@@ -196,12 +189,12 @@ webhook:
     allowPrivilegeEscalation: false
     capabilities:
       drop:
-      - ALL
+        - ALL
     readOnlyRootFilesystem: true
   enableServiceLinks: false
   extraArgs: []
   extraEnv: []
-  featureGates: ""
+  featureGates: ''
   hostNetwork: false
   image:
     pullPolicy: IfNotPresent
@@ -216,25 +209,25 @@ webhook:
     namespaceSelector: {}
   networkPolicy:
     egress:
-    - ports:
-      - port: 80
-        protocol: TCP
-      - port: 443
-        protocol: TCP
-      - port: 53
-        protocol: TCP
-      - port: 53
-        protocol: UDP
-      - port: 6443
-        protocol: TCP
-      to:
-      - ipBlock:
-          cidr: 0.0.0.0/0
+      - ports:
+          - port: 80
+            protocol: TCP
+          - port: 443
+            protocol: TCP
+          - port: 53
+            protocol: TCP
+          - port: 53
+            protocol: UDP
+          - port: 6443
+            protocol: TCP
+        to:
+          - ipBlock:
+              cidr: 0.0.0.0/0
     enabled: false
     ingress:
-    - from:
-      - ipBlock:
-          cidr: 0.0.0.0/0
+      - from:
+          - ipBlock:
+              cidr: 0.0.0.0/0
   nodeSelector:
     kubernetes.io/os: linux
   podDisruptionBudget:
@@ -257,7 +250,7 @@ webhook:
     automountServiceAccountToken: true
     create: true
   serviceIPFamilies: []
-  serviceIPFamilyPolicy: ""
+  serviceIPFamilyPolicy: ''
   serviceLabels: {}
   serviceType: ClusterIP
   strategy: {}
@@ -268,9 +261,11 @@ webhook:
   validatingWebhookConfiguration:
     namespaceSelector:
       matchExpressions:
-      - key: cert-manager.io/disable-validation
-        operator: NotIn
-        values:
-        - "true"
+        - key: cert-manager.io/disable-validation
+          operator: NotIn
+          values:
+            - 'true'
   volumeMounts: []
   volumes: []
+fullnameOverride: cert-manager
+
